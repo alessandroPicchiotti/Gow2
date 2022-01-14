@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { ErrorComponent } from './errors/error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent    
+    LoginComponent,
+    ErrorComponent    
 
   ],
   imports: [
