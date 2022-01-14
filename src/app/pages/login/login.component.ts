@@ -1,4 +1,4 @@
-import { AuthappService } from './../../Services/authapp.service';
+import { AuthappService } from '../../../Services/authapp.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

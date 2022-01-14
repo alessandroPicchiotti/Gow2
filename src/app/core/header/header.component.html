@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">AlphaShop</a>
+      <a class="navbar-brand" href="/"><img src="..\..\assets\images\logo.png"/></a>
   
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -14,18 +14,30 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/welcome">Home</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" title="Prodotti"  routerLink="/articoli">Prodotti</a>
-            <span class="oi oi-box" title="prodotti" aria-hidden="true"></span>
+            <a class="nav-link" title="Prodotti"  routerLink="/articoli">
+            <span class="material-icons md-add_to_drive" title="prodotti" aria-hidden="true"></span>
+            Prodotti
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" title="Promozioni" routerLink="/promozione">Promozioni</a>
+            <a class="nav-link" title="Promozioni" routerLink="/promozione">
+            <span class="material-icons md-campaign" title="promozioni" aria-hidden="true"></span>
+            Promozioni
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" title="Fidelity" routerLink="/fidelity">Fidelity</a>
+            <a class="nav-link" title="Fidelity" routerLink="/fidelity">
+            <span class="material-icons md-card_membership" title="Fidelity" aria-hidden="true"></span>
+            Fidelity
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" title="Ordini" routerLink="/ordini">Ordini</a>
+            <a class="nav-link" title="Ordini" routerLink="/ordini">
+            <span class="material-icons md-local_grocery_store" title="Ordini" aria-hidden="true"></span>
+            Ordini
+            </a>
           </li>
         </ul>
   
@@ -43,7 +55,7 @@
             <li><a class="dropdown-item" href="#" [class.disabled]="this.auth.isLoggend()">Registrati</a></li>
             <li><a class="dropdown-item" href="#" [class.disabled]="!this.auth.isLoggend()">Disabilita</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="this.auth.setLogout()">Logout {{this.auth.getUserNname()}}</a></li>
+            <li><a class="dropdown-item" (click)="this.auth.setLogout()" routerLink="/">Logout {{this.auth.getUserNname()}}</a></li>
           </ul>
         </div>
   
