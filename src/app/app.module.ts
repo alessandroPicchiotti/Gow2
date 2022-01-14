@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './errors/error/error.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ErrorComponent } from './errors/error/error.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

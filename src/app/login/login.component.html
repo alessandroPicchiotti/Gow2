@@ -1,10 +1,12 @@
 
+<div *ngIf="!this.auth.isLoggend()">
+    <app-jumbotron [Titolo]="Titolo" [SottoTitolo] = "SottoTitolo"></app-jumbotron  >
+</div>
 
-
-<div class="container login-container">
+<div *ngIf="!this.auth.isLoggend()" class="login-container">
     <div class="row">
         <div class="col-md-6 login-form">
-            <h3>Autenticazione utente</h3>
+            <h3>Login</h3>
             <div class="form-group">
                 <input type="text" class="form-control"  id="userId" placeholder="Nome Utente" [(ngModel)] = "userName" >
             </div>
@@ -12,7 +14,7 @@
                 <input type="password" class="form-control"  id="password" placeholder="Password" [(ngModel)] = "password">
             </div>
             <div class="form-group">
-                <button  class="btnSubmit">Connetti</button>
+                <button (click)="logon()" class="btnSubmit">Connetti</button>
             </div>
             <div class="form-group">
                     <a href="#" class="ForgetPwd">Password Dimenticata?</a>
