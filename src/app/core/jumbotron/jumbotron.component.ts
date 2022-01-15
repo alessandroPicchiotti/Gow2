@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthappService } from 'src/Services/authapp.service';
 
 @Component({
   selector: 'app-jumbotron',
@@ -15,7 +16,7 @@ export class JumbotronComponent implements OnInit {
   @Input()
   Show : boolean = true;
 
-  constructor() { }
+  constructor(public BasicAuth: AuthappService) { }
 
   ngOnInit(): void {
   }

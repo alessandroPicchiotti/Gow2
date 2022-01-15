@@ -18,6 +18,6 @@ export class AuthappService {
 
   }
   getUserNname = (): string | null => sessionStorage.getItem("userName") ? sessionStorage.getItem("userName") : "";
-  isLoggend = () : boolean => sessionStorage.getItem("userName") !== null ?true:false;
+  isLogged = () : boolean => sessionStorage.getItem("userName") !== null ?true:false;
   setLogout= () => sessionStorage.removeItem("userName");
 }

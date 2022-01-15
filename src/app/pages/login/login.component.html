@@ -1,9 +1,10 @@
 
-<div *ngIf="!this.auth.isLoggend()">
+<div *ngIf="!this.auth.isLogged()">
     <app-jumbotron [Titolo]="Titolo" [SottoTitolo] = "SottoTitolo"></app-jumbotron  >
+        
 </div>
 
-<div *ngIf="!this.auth.isLoggend()" class="login-container">
+<div *ngIf="!this.auth.isLogged()" class="login-container">
     <div class="row">
         <div class="col-md-6 login-form">
             <h3>Login</h3>

@@ -16,11 +16,14 @@ export class ArticoliCardComponent implements OnInit {
     descrizione: '',
     um: '',
     pzcart: 0,
-    peso: 0,
+    pesoLordo: 0,
+    pesoNetto: 0,
     prezzo: 0,
     active: true,
     data: new Date(),
-    imageUrl: ''
+    imageUrl: '',
+    tipo:''
+
   };
 
   @Output()

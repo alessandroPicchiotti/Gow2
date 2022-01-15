@@ -11,7 +11,7 @@ export class RouteguardService implements CanActivate {
   constructor( private auth: AuthappService , private nav :Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     
-    if( this.auth.isLoggend())
+    if( this.auth.isLogged())
       return true
     else
     {

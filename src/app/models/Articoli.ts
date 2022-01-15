@@ -3,9 +3,12 @@ export interface IArticoli {
   descrizione: string
   um: string
   pzcart: number
-  peso: number
+  pesoNetto: number
+  pesoLordo: number
   prezzo: number
   active: boolean
   data: Date
   imageUrl: string
+  tipo:string
+
 }
