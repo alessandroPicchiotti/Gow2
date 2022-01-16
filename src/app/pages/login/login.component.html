@@ -1,0 +1,30 @@
+
+<div *ngIf="!this.auth.isLogged()">
+    <app-jumbotron [Titolo]="Titolo" [SottoTitolo] = "SottoTitolo"></app-jumbotron  >
+        
+</div>
+
+<div *ngIf="!this.auth.isLogged()" class="login-container">
+    <div class="row">
+        <div class="col-md-6 login-form">
+            <h3>Login</h3>
+            <div class="form-group">
+                <input type="text" class="form-control"  id="userId" placeholder="Nome Utente" [(ngModel)] = "userName" >
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control"  id="password" placeholder="Password" [(ngModel)] = "password">
+            </div>
+            <div class="form-group">
+                <button (click)="logon()" class="btnSubmit">Connetti</button>
+            </div>
+            <div class="form-group">
+                    <a href="#" class="ForgetPwd">Password Dimenticata?</a>
+            </div>
+            <div class="alert alert-danger" role="alert" >
+                {{msgInfo}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
