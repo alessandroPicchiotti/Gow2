@@ -1,3 +1,4 @@
+import { GestArticoliComponent } from './pages/articoli/gest-articoli/gest-articoli.component';
 import { ListArticoliComponent } from './pages/articoli/list-articoli/list-articoli.component';
 import { GridArticoliComponent } from './pages/articoli/grid-articoli/grid-articoli.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -9,8 +10,9 @@ import { RouteguardService } from 'src/Services/routeguard.service';
 const routes: Routes = [
   { path:'',component:LoginComponent  },
   { path:'login',component:LoginComponent  },
-  { path:'articoli',component:ListArticoliComponent,canActivate:[RouteguardService]},
+  { path:'articoli/list',component:ListArticoliComponent,canActivate:[RouteguardService]},
   { path:'articoli/grid',component:GridArticoliComponent,canActivate:[RouteguardService]},
+  { path:'articoli/gest/:codart',component:GestArticoliComponent,canActivate:[RouteguardService]},
   { path:'**',component:ErrorComponent  }
 ]
   ;

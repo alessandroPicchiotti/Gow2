@@ -3,6 +3,7 @@ import { AuthappService } from './../../../../Services/authapp.service';
 import { Component, OnInit } from '@angular/core';
 import { IArticoli } from 'src/app/models/Articoli';
 import { ArticoliService } from 'src/Services/data/articoli.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-list-articoli',
@@ -18,7 +19,7 @@ export class ListArticoliComponent implements OnInit {
   filter : string="";
 
   //articoli: IArticoli[]  = []
-  constructor(private articoliService: ArticoliService, public auth : AuthappService) { }
+  constructor(private articoliService: ArticoliService, public auth : AuthappService, private route : Router) { }
 
   ngOnInit(): void {
       this.getArticoliByDescrizione("");
@@ -28,6 +29,8 @@ export class ListArticoliComponent implements OnInit {
     this.pagina=1;
     this.articoli$=[];
     this.errore ="";
+    console.log("ecco il filtro: -" + this.filter);
+    
     this.getArticoliByDescrizione(this.filter);
   }
 
@@ -47,5 +50,8 @@ export class ListArticoliComponent implements OnInit {
     this.errore   = response.statusText;
   }
 
-
+  modifica = (codart : string) =>{
+    //console.log("modifica" + codart)
+    this.route.navigate(["articoli/gest",codart]);
+  }
 }

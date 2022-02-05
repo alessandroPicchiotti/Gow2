@@ -1,0 +1,116 @@
+<section class="content-main" style="max-width: 760px">
+
+    <div class="content-header">
+		<h4 class="content-title">{{title}}</h4>		
+	</div>
+
+	<div class="alert alert-success" role="alert" *ngIf="conferma"> 
+		{{conferma}}
+	</div>
+	<div class="alert alert-danger" role="alert" *ngIf="errore"> 
+		{{errore}}
+	</div>
+	<div class="card mb-4">
+    	<div class="card-body">
+
+    
+     <form (ngSubmit)="artform.valid && Salva()" #artform="ngForm" >     
+
+		<!-- Codice, Barcode -->
+		<div class="row gx-2">
+			<div class="col-sm-6 mb-3">
+				<label for="codArt" class="form-label">Codice Articolo:</label>
+				<input id="codArt"  name ="codArt" type="text" placeholder="" class="form-control" [(ngModel)]="articolo.ar_codart" >
+			</div>
+			<div class="col-sm-6 mb-3">
+				<label for="ean" class="form-label">Barcode:</label>
+				<input id="ean"  type="text" placeholder="" class="form-control">
+			</div>
+		</div>
+
+		<!--Descrizione -->
+    	<div class="mb-4">
+			<label class="form-label">Descrizione Articolo</label>
+			<textarea placeholder="" class="form-control" rows="2" [(ngModel)]="articolo.ar_descr" name="ar_descr" required maxlength="100" minlength="3" #articoloDescrizione="ngModel"></textarea>
+			<span class="alert-danger" *ngIf="articoloDescrizione.invalid && (articoloDescrizione.dirty || articoloDescrizione.touched)">
+				descrizone minima 3 carateri massima 100
+			</span>
+		</div>
+
+		<!--Unità di misura, Iva -->
+        <div class="row gx-2">
+			<div class="col-sm-6 mb-3">
+				<label class="form-label">Unità di Misura</label>
+				<select class="form-select" [(ngModel)]="articolo.ar_unmis">
+					<option value="PZ"> Pezzi </option>
+					<option value="LT"> Litri </option>
+					<option value="KG"> Kilogrammi </option>
+				</select>
+			</div>
+			<div class="col-sm-6 mb-3">
+				<label class="form-label">Iva</label>
+				<select class="form-select"  [(ngModel)]="articolo.ar_codiva" name="ar_codiva">
+					<option [ngValue]="iva.tb_codciva" *ngFor="let iva of tabciva"> {{iva.tb_aliq}}% - {{iva.tb_desciva}} </option>					
+				</select>
+			</div>
+		</div> <!-- row.// -->
+
+		<!-- Pezzi per cartone, Peso, Prezzo, Valuta -->
+        <div class="mb-4">
+        	<label class="form-label">Pezzi Per Cartone: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Peso Netto:</label>
+            <div class="row gx-2">
+            <div class="col-3">
+				<input placeholder="Pezzi" type="text" class="form-control" name="ar_confez2" [(ngModel)]="articolo.ar_confez2">
+            </div>
+            <div class="col-3">
+            	<input placeholder="Peso" type="text" class="form-control" name="ar_pesonet" [(ngModel)]="articolo.ar_pesonet">
+            </div>
+            <div class="col-4">
+				<input placeholder="Prezzo" type="text" class="form-control">
+			</div>
+			<div class="col-2">
+				<select class="form-select">
+					<option> EUR </option>
+					<option> USD </option>
+					<option> GBP </option>
+				</select>
+			</div>
+          </div>
+        </div>
+
+		<!-- Categoria, Stato Articolo -->
+        <div class="row gx-2">
+			<div class="col-sm-6 mb-3">
+				<label class="form-label">Categoria:</label>
+				<select class="form-select" [(ngModel)]="articolo.ar_famprod">
+					<option [ngValue]="famiglia.tb_codcfam" *ngFor="let famiglia of tabcfam" > {{famiglia.tb_descfam}} </option>
+					
+				</select>
+			</div>
+				<div class="col-sm-6 mb-3">
+				<label class="form-label">Stato:</label>
+				<select class="form-select" [(ngModel)]="articolo.ar_codtipa" name="ar_codtipa">
+					<option value=1> Attivo </option>
+					<option value=2> Sospeso </option>
+					<option value=3> Eliminato </option>
+				</select>
+				</div>
+		</div> <!-- row.// -->
+
+		<!-- Immagine -->
+		<div class="mb-4">
+			<label class="form-label">Immagine:</label>
+			<input class="form-control" type="file">
+		</div>
+
+      <br>
+      <button class="btn btn-primary" type="submit" [disabled]="artform.invalid">Salva Articolo</button>
+	  <a class="btn btn-outline-warning" routerLink="/articoli/list" class="btn btn-outline-danger"> × Annulla</a>
+	 
+         
+    </form> 
+        
+    </div>
+</div>
+
+</section>

@@ -1,3 +1,5 @@
+import { IApiMsg } from './../../app/models/ApiMag';
+import { IArtico, ITabciva } from './../../app/models/Articoli';
 import { Injectable } from '@angular/core';
 import { IArticoli } from 'src/app/models/Articoli';
 import { HttpClient } from '@angular/common/http';
@@ -31,20 +33,24 @@ export class ArticoliService {
 
   constructor(private httpcli:HttpClient) { }
 
-//  getArticoli = () : IArticoli[] => this.articoli;
 
   
-  //#region   "Call WS"
-  
+  //#region   "Call WS"  
   getArticoliByDescrizione = ( descrizione:string ) =>{
-    
-    return this.httpcli.get<IArticoli[]>(`http://localhost:62001/api/articoli?artDescr=${descrizione}`)
-    .pipe(
-      map( response => {
-          response.forEach( item =>item.tipo = this.getTipoArticoloDex( item.tipo));
-          return response;
-      })
-    );
+    if(descrizione === "" || !descrizione) 
+    {
+      return this.httpcli.get<IArticoli[]>(`http://localhost:62001/articoli/gettutti`);
+    }
+    else
+    {
+        return this.httpcli.get<IArticoli[]>(`http://localhost:62001/articoli/getbyDescr/${descrizione}`)
+        .pipe(
+          map( response => {
+              response.forEach( item =>item.tipo = this.getTipoArticoloDex( item.tipo));
+              return response;
+          })
+        );
+      }
     
   }
 
@@ -55,7 +61,13 @@ export class ArticoliService {
     else
       return "non attivo"
   }
-  //#endregion
+
+  getArticoloByCodice = (codiceArticolo : string) =>{
+    return this.httpcli.get<IArtico>(`http://localhost:62001/articoli/getbyCodice/${codiceArticolo}`);
+  }
   
+  updateArticolo = (articolo: IArtico) =>{
+    return this.httpcli.put<IApiMsg>(`http://localhost:62001/articoli/Modifica/`,articolo);
+ }
 
 }

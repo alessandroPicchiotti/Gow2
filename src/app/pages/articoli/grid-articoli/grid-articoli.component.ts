@@ -20,7 +20,7 @@ export class GridArticoliComponent implements OnInit {
     this.articoliService.getArticoliByDescrizione("cola").subscribe({
       next: this.handleResponse.bind(this),
       error:this.handleError.bind(this)
-    })
+    });
   }
 
   handleResponse = (response : IArticoli[]) =>{
