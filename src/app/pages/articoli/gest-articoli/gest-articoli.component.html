@@ -1,7 +1,7 @@
 <section class="content-main" style="max-width: 760px">
 
-    <div class="content-header">
-		<h4 class="content-title">{{title}}</h4>		
+    <div class="content-header text-center">
+		<label class="content-title">{{title}}</label>		
 	</div>
 
 	<div class="alert alert-success" role="alert" *ngIf="conferma"> 
@@ -20,7 +20,7 @@
 		<div class="row gx-2">
 			<div class="col-sm-6 mb-3">
 				<label for="codArt" class="form-label">Codice Articolo:</label>
-				<input id="codArt"  name ="codArt" type="text" placeholder="" class="form-control" [(ngModel)]="articolo.ar_codart" >
+				<input id="codArt"  name ="ar_codart" type="text" placeholder="" class="form-control" [(ngModel)]="articolo.ar_codart" >
 			</div>
 			<div class="col-sm-6 mb-3">
 				<label for="ean" class="form-label">Barcode:</label>
@@ -41,11 +41,14 @@
         <div class="row gx-2">
 			<div class="col-sm-6 mb-3">
 				<label class="form-label">Unità di Misura</label>
-				<select class="form-select" [(ngModel)]="articolo.ar_unmis">
+				<select class="form-select" [(ngModel)]="articolo.ar_unmis" required maxlength="2" name="ar_unmis" #unitaMisuraArticolo="ngModel">
 					<option value="PZ"> Pezzi </option>
 					<option value="LT"> Litri </option>
 					<option value="KG"> Kilogrammi </option>
 				</select>
+				<span class="alert-danger" *ngIf="unitaMisuraArticolo.invalid && (unitaMisuraArticolo.dirty || unitaMisuraArticolo.touched)">
+					Unità di misura obbligatorio		
+				</span>
 			</div>
 			<div class="col-sm-6 mb-3">
 				<label class="form-label">Iva</label>
@@ -82,7 +85,7 @@
         <div class="row gx-2">
 			<div class="col-sm-6 mb-3">
 				<label class="form-label">Categoria:</label>
-				<select class="form-select" [(ngModel)]="articolo.ar_famprod">
+				<select class="form-select" [(ngModel)]="articolo.ar_famprod" name="ar_famprod">
 					<option [ngValue]="famiglia.tb_codcfam" *ngFor="let famiglia of tabcfam" > {{famiglia.tb_descfam}} </option>
 					
 				</select>

@@ -11,8 +11,9 @@ const routes: Routes = [
   { path:'',component:LoginComponent  },
   { path:'login',component:LoginComponent  },
   { path:'articoli/list',component:ListArticoliComponent,canActivate:[RouteguardService]},
-  { path:'articoli/grid',component:GridArticoliComponent,canActivate:[RouteguardService]},
-  { path:'articoli/gest/:codart',component:GestArticoliComponent,canActivate:[RouteguardService]},
+  { path:'articoli/grid',component:GridArticoliComponent,canActivate:[RouteguardService]},  
+  { path:'articoli/gest/:codart',component:GestArticoliComponent,canActivate:[RouteguardService]},  
+  { path:'articoli/gest',component:GestArticoliComponent,canActivate:[RouteguardService]},
   { path:'**',component:ErrorComponent  }
 ]
   ;

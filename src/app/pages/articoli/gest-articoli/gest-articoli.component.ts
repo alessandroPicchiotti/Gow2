@@ -12,9 +12,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class GestArticoliComponent implements OnInit {
 
-  title : string = "Modifica Articoli";
-
+  title : string = "";
   CodArt: string = '';
+  stato: string="";
 
   articolo: IArtico ={
     ar_codart : "",
@@ -43,7 +43,20 @@ export class GestArticoliComponent implements OnInit {
    
     //console.log(this.routelink.snapshot.params['codart'])
     this.CodArt = this.routelink.snapshot.params['codart'];
-    this.apriArticolo(this.CodArt);
+    if(this.CodArt)
+    {
+      this.title ="Modifica articolo";
+      this.apriArticolo(this.CodArt);
+      this.stato = "M";
+    }
+    else  
+    {
+      this.nuovoArticolo();
+      this.title ="Crea articolo";
+      this.stato = "N";
+    }
+
+    
     this.getAllIva();
     this.getAllFamiglie();
   }
@@ -53,6 +66,13 @@ export class GestArticoliComponent implements OnInit {
       next: this.handleResponse.bind(this),
       error:this.handleError.bind(this)
     });
+  }
+  nuovoArticolo =() =>{
+    this.articoliService.nuovoArticolo().subscribe({
+      next:(Response) => {
+        this.articolo = Response;
+      }
+    })
   }
   
 
@@ -75,23 +95,48 @@ export class GestArticoliComponent implements OnInit {
   }
 
   Salva = ()=>{
-    console.log(this.articolo);
+    this.errore="";
+    this.conferma="";
+    //console.log(this.articolo);
+    if(this.stato === "M")
+    {
+      //this.articolo.Iva.tb_codciva = this.articolo.ar_codiva;
+        this.articoliService.updateArticolo(this.articolo).subscribe({
+          next:(response) =>{
+            this.apiMsg = response;
+            console.log(this.apiMsg.descrizione);
+            this.conferma = this.apiMsg.descrizione;
+          },
+          error:(error) =>{ 
+            //this.handleError.bind(this);
+            //this.apiMsg = error;
+            console.log(error.error);
+            this.errore = error.error;
+          }
+            
 
-    //this.articolo.Iva.tb_codciva = this.articolo.ar_codiva;
-    this.articoliService.updateArticolo(this.articolo).subscribe({
-      next:(response) =>{
-        this.apiMsg = response;
-        console.log(this.apiMsg.descrizione);
-        this.conferma = this.apiMsg.descrizione;
-      },
-      error:(error) =>{ 
-        //this.handleError.bind(this);
-        //this.apiMsg = error;
-        console.log(error.error);
-        this.errore = error.error;
-      }
+      });
+    }
+    else
+    {
+        //this.articolo.Iva.tb_codciva = this.articolo.ar_codiva;
+        this.articoliService.inserisciArticolo(this.articolo).subscribe({
+          next:(response) =>{
+            this.apiMsg = response;
+            console.log(this.apiMsg.descrizione);
+            this.conferma = this.apiMsg.descrizione;
+          },
+          error:(error) =>{ 
+            //this.handleError.bind(this);
+            //this.apiMsg = error;
+            console.log(error.error);
+            this.errore = error.error;
+          }
+            
 
-    })
+      });
+        
+    }
     
   }
 

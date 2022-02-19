@@ -12,9 +12,10 @@ import { CoreModule } from './core/core.module';
 import { GridArticoliComponent } from './pages/articoli/grid-articoli/grid-articoli.component';
 import { ArticoliCardComponent } from './components/articoli-card/articoli-card.component';
 import { ListArticoliComponent } from './pages/articoli/list-articoli/list-articoli.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GestArticoliComponent } from './pages/articoli/gest-articoli/gest-articoli.component';
+import { AuthInterceptorService } from 'src/Services/interceptors/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { GestArticoliComponent } from './pages/articoli/gest-articoli/gest-artic
     HttpClientModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

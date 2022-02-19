@@ -54,4 +54,8 @@ export class ListArticoliComponent implements OnInit {
     //console.log("modifica" + codart)
     this.route.navigate(["articoli/gest",codart]);
   }
+  Nuovo = () =>{
+    console.log("aggiungo l'articolo");
+    this.route.navigate(["articoli/gest"]);
+  }
 }

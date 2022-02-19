@@ -9,30 +9,33 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  userName : string = 'alp';
+  userName : string = '';
   password : string ='';
   msgInfo : string='';
   Titolo : string="Accedi o registrati"; 
   SottoTitolo : string="Visualizzarai o potrai acquistare la nostra vasta gamma di prodotti";
   
  
-  constructor(private navi: Router, public auth : AuthappService) { }
+  constructor(private navi: Router, public BasicAuth : AuthappService) { }
 
   ngOnInit(): void {
   }
 
-  logon(){
-    //this.navi.navigate(["login"]);
-    if( this.auth.logOn(this.userName,this.password))
-    {
-      this.msgInfo ="Benvenuto " + this.userName ;
-      
-    }
-    else  
-    {
-      this.msgInfo ="Login non valido";
-      
-    }
+  gestAuth = (): void => {
+    console.log(this.userName);
+
+    this.BasicAuth.autenticaService(this.userName, this.password).subscribe({
+      next: (response) => {
+        console.log(response);
+
+        //this.autenticato = true;
+        //this.route.navigate(['welcome', this.userName]);
+      },
+      error: (error) => {
+        console.log(error.error);
+        this.msgInfo = error.error;
+      }
+    });
   }
 
 }

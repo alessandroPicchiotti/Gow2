@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { IArticoli } from 'src/app/models/Articoli';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -13,6 +14,8 @@ import { map } from 'rxjs/operators';
 export class ArticoliService {
   
 
+  server : string = environment.server;
+  port : string = environment.port;
   /*
   articoli: IArticoli[]  = [
     {codart : '014600301', descrizione : 'BARILLA FARINA 1 KG', um : 'PZ', pzcart : 24, peso : 1, prezzo : 1.09, active : true, data : new Date(), imageUrl: 'assets/images/prodotti/014600301.jpg'},
@@ -39,11 +42,11 @@ export class ArticoliService {
   getArticoliByDescrizione = ( descrizione:string ) =>{
     if(descrizione === "" || !descrizione) 
     {
-      return this.httpcli.get<IArticoli[]>(`http://localhost:62001/articoli/gettutti`);
+      return this.httpcli.get<IArticoli[]>(`http://${this.server}:${this.port}/articoli/gettutti`);
     }
     else
     {
-        return this.httpcli.get<IArticoli[]>(`http://localhost:62001/articoli/getbyDescr/${descrizione}`)
+        return this.httpcli.get<IArticoli[]>(`http://${this.server}:${this.port}/articoli/getbyDescr/${descrizione}`)
         .pipe(
           map( response => {
               response.forEach( item =>item.tipo = this.getTipoArticoloDex( item.tipo));
@@ -63,11 +66,16 @@ export class ArticoliService {
   }
 
   getArticoloByCodice = (codiceArticolo : string) =>{
-    return this.httpcli.get<IArtico>(`http://localhost:62001/articoli/getbyCodice/${codiceArticolo}`);
+    return this.httpcli.get<IArtico>(`http://${this.server}:${this.port}/articoli/getbyCodice/${codiceArticolo}`);
   }
   
   updateArticolo = (articolo: IArtico) =>{
-    return this.httpcli.put<IApiMsg>(`http://localhost:62001/articoli/Modifica/`,articolo);
+    return this.httpcli.put<IApiMsg>(`http://${this.server}:${this.port}/articoli/Modifica/`,articolo);
  }
-
+  inserisciArticolo = (articolo: IArtico) =>{
+    return this.httpcli.post<IApiMsg>(`http://${this.server}:${this.port}/articoli/Inserisci/`,articolo);
+  }
+  nuovoArticolo = () =>{
+    return this.httpcli.get<IArtico>(`http://${this.server}:${this.port}/articoli/getArticoloBusCube`);
+  }
 }

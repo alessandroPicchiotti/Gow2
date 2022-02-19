@@ -1,8 +1,8 @@
 <section class="content-main">
 
     
-      <label>Lista Prodotti</label>
-    
+      <label class="col-md-10 text-center">Lista Prodotti</label>
+      <button class="col-md-2 btn btn-primary" (click)="Nuovo()">Nuovo</button>
     <div class="card mb-4">
       <!-- Inizio Header -->
       <header class="card-header">
@@ -21,14 +21,14 @@
                               <option>Tutti</option>
                           </select>
                       </div>
-            <div class="col-lg-2 col-6 col-md-3">
-              <select class="form-select">
-                <option>Cetegorie</option>
-                <option>Alimentari</option>
-                <option>Chimico</option>
-                <option>Freschi</option>
-              </select>
-            </div>
+                      <div class="col-lg-2 col-6 col-md-3">
+                        <select class="form-select">
+                          <option>Cetegorie</option>
+                          <option>Alimentari</option>
+                          <option>Chimico</option>
+                          <option>Freschi</option>
+                        </select>
+                      </div>
                       <div class="col-lg-2 col-6 col-md-3">
                           <select class="form-select">
                               <option>Mostra 20</option>
@@ -36,11 +36,13 @@
                               <option>Mostra 40</option>
                           </select>
                       </div>
-                  </div>
+          </div>
+          
+
       </header> <!-- Fine Header -->
   
       <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive altezza-minima">
           <table class="table table-hover">
             <thead>
                   <tr>
